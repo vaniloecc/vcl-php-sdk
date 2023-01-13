@@ -28,7 +28,7 @@ final class ApiClient
         $this->http = new HttpClient();
     }
 
-    public static function connectTo(string $url): ApiClient
+    public static function for(string $url): ApiClient
     {
         return new self($url);
     }

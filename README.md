@@ -32,6 +32,5 @@ To connect to the Vanilo Cloud API, you'll need your Shop's URL, a `client_id` a
 #### Connecting To The API
 
 ```php
-$cloudApi = VaniloCloud\ApiClient::connectTo('https://your.v-shop.cloud')
-                            ->withCredentials('client id', 'client secret');
+$cloudApi = VaniloCloud\ApiClient::for('https://your.v-shop.cloud')->withCredentials('client id', 'client secret');
 ```
