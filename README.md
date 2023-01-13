@@ -25,12 +25,35 @@ composer require vanilo/cloud-sdk
 
 To connect to the Vanilo Cloud API, you'll need your Shop's URL, a `client_id` and a `client_secret`.
 
+The following code returns an API client instance:
+
+```php
+$api = VaniloCloud\ApiClient::for('https://your.v-shop.cloud')->withCredentials('client id', 'client secret');
+```
+
 > Under the hood, the SDK will fetch auth tokens from the API in order to
 > minimize the number of occasions when the `client_id` and `client_secret` are
 > being sent over the wire.
 
-#### Connecting To The API
+To connect to the generic Sandbox environment use:
 
 ```php
-$cloudApi = VaniloCloud\ApiClient::for('https://your.v-shop.cloud')->withCredentials('client id', 'client secret');
+$api = VaniloCloud\ApiClient::sandbox();
 ```
+
+### Taxonomies
+
+To fetch a taxonomy by id:
+
+```php
+$api = VaniloCloud\ApiClient::sandbox();
+$taxonomy = $api->taxonomy(1);
+// => VaniloCloud\Models\Taxonomy
+//     id: "1",
+//     name: "Category",
+//     slug: "category",
+//     created_at: "2022-12-06T16:23:34+00:00",
+//     updated_at: "2023-01-13T08:03:29+00:00"
+```
+
+### Products
