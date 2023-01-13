@@ -21,5 +21,6 @@ class Taxonomy
     use HasDynamicAttributeConstructor;
 
     public readonly string $name;
+
     public readonly ?string $slug;
 }
