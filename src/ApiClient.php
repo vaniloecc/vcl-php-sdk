@@ -40,4 +40,18 @@ final class ApiClient
 
         return $this;
     }
+
+    public function withRefreshToken(string $token): ApiClient
+    {
+        $this->credentials['refresh_token'] = $token;
+
+        return $this;
+    }
+
+    public function withAuthToken(string $token): ApiClient
+    {
+        $this->credentials['auth_token'] = $token;
+
+        return $this;
+    }
 }
