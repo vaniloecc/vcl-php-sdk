@@ -40,6 +40,9 @@ To connect to the generic Sandbox environment use:
 $api = VaniloCloud\ApiClient::sandbox();
 ```
 
+> Vanilo Cloud Sandbox is available at: https://sandbox.v-shop.cloud/
+> The sandbox database is reset every 30 minutes
+
 ### Taxonomies
 
 To fetch a taxonomy by id:
