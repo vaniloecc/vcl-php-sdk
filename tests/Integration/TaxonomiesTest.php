@@ -20,7 +20,7 @@ use VaniloCloud\Models\Taxonomy;
 
 class TaxonomiesTest extends TestCase
 {
-    /** @ test */
+    /** @test */
     public function it_can_fetch_a_taxonomy_by_its_id()
     {
         $api = ApiClient::sandbox();
