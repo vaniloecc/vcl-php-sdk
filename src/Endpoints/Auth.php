@@ -16,6 +16,7 @@ namespace VaniloCloud\Endpoints;
 
 use VaniloCloud\Exceptions\AccessForbiddenException;
 use VaniloCloud\Exceptions\InvalidCredentialsException;
+use VaniloCloud\Exceptions\InvalidEndpointException;
 use VaniloCloud\Exceptions\InvalidRefreshTokenException;
 use VaniloCloud\Exceptions\RefreshTokenExpiredException;
 use VaniloCloud\Models\Credentials;
@@ -25,6 +26,7 @@ trait Auth
 {
     /**
      * @throws InvalidCredentialsException
+     * @throws InvalidEndpointException
      */
     public function authLogin(Credentials $credentials): Token
     {
@@ -34,6 +36,8 @@ trait Auth
             throw new InvalidCredentialsException($result->json('message', 'Invalid Credentials'));
         } elseif (422 === $result->status()) {
             throw new InvalidCredentialsException($result->json('message', 'Malformed Credentials'));
+        } elseif (404 === $result->status()) {
+            throw new InvalidEndpointException("The remote URL `{$this->url}` is not a Vanilo Cloud API");
         }
 
         return new Token(
@@ -47,6 +51,7 @@ trait Auth
      * @throws RefreshTokenExpiredException
      * @throws InvalidRefreshTokenException
      * @throws AccessForbiddenException
+     * @throws InvalidEndpointException
      */
     public function authToken(string $refreshToken): Token
     {
@@ -58,6 +63,8 @@ trait Auth
             throw new RefreshTokenExpiredException($result->json('message', 'Refresh token has expired. Use the login endpoint to get a new one.'));
         } elseif (403 === $result->status()) {
             throw new AccessForbiddenException($result->json('message', 'Your access is forbidden. Your account is probably disabled'));
+        } elseif (404 === $result->status()) {
+            throw new InvalidEndpointException("The remote URL `{$this->url}` is not a Vanilo Cloud API");
         }
 
         return new Token(
