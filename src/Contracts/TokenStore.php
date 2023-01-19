@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace VaniloCloud\Contracts;
 
-use JetBrains\PhpStorm\ArrayShape;
 use VaniloCloud\Models\Credentials;
 
 interface TokenStore
