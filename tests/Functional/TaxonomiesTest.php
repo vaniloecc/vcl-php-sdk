@@ -12,8 +12,9 @@ declare(strict_types=1);
  *
  */
 
-namespace VaniloCloud\Tests\Integration;
+namespace VaniloCloud\Tests\Functional;
 
+use Illuminate\Support\Collection;
 use PHPUnit\Framework\TestCase;
 use VaniloCloud\ApiClient;
 use VaniloCloud\Models\Taxonomy;
@@ -29,5 +30,17 @@ class TaxonomiesTest extends TestCase
         $this->assertInstanceOf(Taxonomy::class, $taxonomy);
         $this->assertEquals('Category', $taxonomy->name);
         $this->assertEquals('category', $taxonomy->slug);
+    }
+
+    /** @test */
+    public function it_can_retrieve_the_list_of_taxonomies()
+    {
+        $api = ApiClient::sandbox();
+
+        $taxonomies = $api->taxonomies();
+
+        $this->assertInstanceOf(Collection::class, $taxonomies);
+        $this->assertGreaterThanOrEqual(1, $taxonomies->count());
+        $this->assertInstanceOf(Taxonomy::class, $taxonomies->first());
     }
 }

@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace VaniloCloud\Endpoints;
 
+use Illuminate\Support\Collection;
 use VaniloCloud\Models\Taxonomy;
 
 trait Taxonomies
@@ -26,5 +27,20 @@ trait Taxonomies
         }
 
         return new Taxonomy($this->transpose($response->json(), Taxonomy::class));
+    }
+
+    public function taxonomies(): Collection
+    {
+        $result = collect();
+        $response = $this->get('/taxonomies');
+        if ($response->successful()) {
+            foreach ($response->json('data') as $item) {
+                /** @var Taxonomy $taxonomy */
+                $taxonomy = $this->transpose($item, Taxonomy::class);
+                $result->put($taxonomy->id, $taxonomy);
+            }
+        }
+
+        return $result;
     }
 }

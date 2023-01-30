@@ -12,7 +12,7 @@ declare(strict_types=1);
  *
  */
 
-namespace VaniloCloud\Tests\Integration;
+namespace VaniloCloud\Tests\Functional;
 
 use Illuminate\Http\Client\Response;
 use PHPUnit\Framework\TestCase;
