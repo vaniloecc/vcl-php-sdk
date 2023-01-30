@@ -43,6 +43,28 @@ $api = VaniloCloud\ApiClient::sandbox();
 > Vanilo Cloud Sandbox is available at: https://sandbox.v-shop.cloud/  
 > The sandbox database is reset every 30 minutes
 
+### Retrieve Raw Responses
+
+If you need to obtain the raw HTTP response from the API, you need to call the `rawGet`, `rawPost`, etc methods:
+
+```php
+$api = VaniloCloud\ApiClient::sandbox();
+$api->rawGet('/taxonomies');
+//=> Illuminate\Http\Client\Response {#2743
+//     +cookies: GuzzleHttp\Cookie\CookieJar {#2725},
+//     +transferStats: GuzzleHttp\TransferStats {#2765},
+```
+
+To obtain the contents of the API call, use `json()` method of the returned response:
+
+```php
+$response = $api->rawGet('/taxonomies');
+foreach ($response->json('data') as $taxonomy) {
+    echo $taxonomy['name'];
+}
+// Category
+```
+
 ### Taxonomies
 
 To fetch a taxonomy by id:

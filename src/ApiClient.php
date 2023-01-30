@@ -103,13 +103,18 @@ final class ApiClient
         $this->tokenStore = $tokenStore;
     }
 
-    private function get(string $path): Response
+    public function rawGet(string $path, null|array|string $query = null): Response
+    {
+        return $this->get($path, $query);
+    }
+
+    private function get(string $path, null|array|string $query = null): Response
     {
         return $this
             ->http
             ->withToken($this->wangleAuthToken())
             ->asJson()
-            ->get($this->url . $path);
+            ->get($this->url . $path, $query);
     }
 
     private function transpose(array $attributes, string $forClass): array
