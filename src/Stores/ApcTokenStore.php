@@ -39,12 +39,12 @@ class ApcTokenStore implements TokenStore
 
     public function getAccessToken(): ?string
     {
-        return apc_fetch($this->accessTokenKey()) ?: null;
+        return apcu_fetch($this->accessTokenKey()) ?: null;
     }
 
     public function saveAccessToken(string $token): void
     {
-        apc_store($this->accessTokenKey(), $token, $this->accessTokenTtl);
+        apcu_store($this->accessTokenKey(), $token, $this->accessTokenTtl);
     }
 
     public function hasRefreshToken(): bool
@@ -54,12 +54,12 @@ class ApcTokenStore implements TokenStore
 
     public function getRefreshToken(): ?string
     {
-        return apc_fetch($this->refreshTokenKey()) ?: null;
+        return apcu_fetch($this->refreshTokenKey()) ?: null;
     }
 
     public function saveRefreshToken(string $token): void
     {
-        apc_store($this->refreshTokenKey(), $token, $this->refreshTokenTtl);
+        apcu_store($this->refreshTokenKey(), $token, $this->refreshTokenTtl);
     }
 
     public function hasCredentials(): bool
@@ -69,12 +69,12 @@ class ApcTokenStore implements TokenStore
 
     public function getCredentials(): ?Credentials
     {
-        return apc_fetch($this->credentialsKey()) ?: null;
+        return apcu_fetch($this->credentialsKey()) ?: null;
     }
 
     public function saveCredentials(Credentials $credentials): void
     {
-        apc_store($this->credentialsKey(), $credentials, $this->credentialsTtl);
+        apcu_store($this->credentialsKey(), $credentials, $this->credentialsTtl);
     }
 
     private function credentialsKey(): string
