@@ -18,6 +18,7 @@ use VaniloCloud\Exceptions\AccessForbiddenException;
 use VaniloCloud\Exceptions\InvalidCredentialsException;
 use VaniloCloud\Exceptions\InvalidEndpointException;
 use VaniloCloud\Exceptions\InvalidRefreshTokenException;
+use VaniloCloud\Exceptions\RateLimitExceededException;
 use VaniloCloud\Exceptions\RefreshTokenExpiredException;
 use VaniloCloud\Models\Credentials;
 use VaniloCloud\Models\Token;
@@ -38,6 +39,10 @@ trait Auth
             throw new InvalidCredentialsException($result->json('message', 'Malformed Credentials'));
         } elseif (404 === $result->status()) {
             throw new InvalidEndpointException("The remote URL `{$this->url}` is not a Vanilo Cloud API");
+        } elseif (429 === $result->status()) {
+            throw new RateLimitExceededException("Too many login requests to `{$this->url}`. Is the token store properly configured?");
+        } elseif ($result->failed()) {
+            throw new \RuntimeException('Remote said: ' . $result->status() . ' ' . $result->reason());
         }
 
         return new Token(

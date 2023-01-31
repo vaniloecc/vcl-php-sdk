@@ -4,6 +4,7 @@
 ##### 2023-XX-YY
 
 - Fixed Taxonomy hydration in its list endpoint
+- Added `RateLimitExceededException`
 
 ## 0.1.0
 ##### 2023-01-31
