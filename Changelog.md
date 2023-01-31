@@ -1,7 +1,7 @@
 # Vanilo Cloud PHP SDK Changelog
 
-## Unreleased
-##### 2023-XX-YY
+## 0.2.0
+##### 2023-01-31
 
 - Fixed Taxonomy hydration in its list endpoint
 - Added `RateLimitExceededException`
