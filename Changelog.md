@@ -5,6 +5,7 @@
 
 - Fixed Taxonomy hydration in its list endpoint
 - Added `RateLimitExceededException`
+- Added the Apc token store (used by default if apcu is enabled and no explicit store was specified)
 
 ## 0.1.0
 ##### 2023-01-31

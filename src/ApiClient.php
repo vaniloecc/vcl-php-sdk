@@ -25,6 +25,7 @@ use ReflectionNamedType;
 use VaniloCloud\Contracts\TokenStore;
 use VaniloCloud\Exceptions\MissingCredentialsException;
 use VaniloCloud\Models\Credentials;
+use VaniloCloud\Stores\ApcTokenStore;
 use VaniloCloud\Stores\MemoryTokenStore;
 
 final class ApiClient
@@ -64,9 +65,15 @@ final class ApiClient
         return new self($url);
     }
 
-    public static function sandbox(): ApiClient
+    public static function sandbox(TokenStore $tokenStore = null): ApiClient
     {
-        return self::for(self::SANDBOX_URL)->withCredentials(self::SANDBOX_CLIENT_ID, self::SANDBOX_CLIENT_SECRET);
+        $instance = self::for(self::SANDBOX_URL);
+
+        if (null !== $tokenStore) {
+            $instance->usingTokenStore($tokenStore);
+        }
+
+        return $instance->withCredentials(self::SANDBOX_CLIENT_ID, self::SANDBOX_CLIENT_SECRET);
     }
 
     public function useTimeZone(string $timeZone): self
@@ -103,9 +110,11 @@ final class ApiClient
         return $this;
     }
 
-    public function usingTokenStore(TokenStore $tokenStore): void
+    public function usingTokenStore(TokenStore $tokenStore): ApiClient
     {
         $this->tokenStore = $tokenStore;
+
+        return $this;
     }
 
     public function rawGet(string $path, null|array|string $query = null): Response
@@ -216,7 +225,11 @@ final class ApiClient
     private function tokenStore(): TokenStore
     {
         if (null === $this->tokenStore) {
-            $this->tokenStore = new MemoryTokenStore();
+            if (extension_loaded('apcu') && apcu_enabled()) {
+                $this->tokenStore = new ApcTokenStore($this->url);
+            } else {
+                $this->tokenStore = new MemoryTokenStore();
+            }
         }
 
         return $this->tokenStore;
