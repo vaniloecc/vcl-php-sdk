@@ -8,10 +8,12 @@
         "source": "https://github.com/vaniloecc/vcl-php-sdk",
         "issues": "https://github.com/vaniloecc/vcl-php-sdk/issues"
     },
+    "prefer-stable": true,
+    "minimum-stability": "dev",
     "require": {
         "php": "^8.1",
         "illuminate/http": "^8.22.1|^9.0|^10.0",
-        "illuminate/collections": "*",
+        "illuminate/collections": ">8",
         "guzzlehttp/guzzle": "^7.4",
         "nesbot/carbon": "^2.53.1"
     },
