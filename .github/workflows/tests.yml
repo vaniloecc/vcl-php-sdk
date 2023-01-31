@@ -10,7 +10,7 @@ jobs:
       matrix:
         php: ['8.1', '8.2']
         laravel: ['8.22.1', '8.83', '9.0', '9.47', '10.0']
-    name: PHP ${{ matrix.php }}
+    name: PHP ${{ matrix.php }} Laravel ${{ matrix.laravel }}
     steps:
       - name: Checkout
         uses: actions/checkout@master
