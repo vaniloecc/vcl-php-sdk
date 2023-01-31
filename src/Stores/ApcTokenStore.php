@@ -24,7 +24,6 @@ class ApcTokenStore implements TokenStore
         private ?int $credentialsTtl = null,
         private ?int $accessTokenTtl = 90000, // 25 hours
         private ?int $refreshTokenTtl = 31708800, // 367 days
-
     ) {
         if (!extension_loaded('apcu')) {
             throw new \RuntimeException('The `apcu` extension is missing and is required to use the ApcTokenStore');

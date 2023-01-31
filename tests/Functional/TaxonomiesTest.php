@@ -18,7 +18,6 @@ use Illuminate\Support\Collection;
 use PHPUnit\Framework\TestCase;
 use VaniloCloud\ApiClient;
 use VaniloCloud\Models\Taxonomy;
-use VaniloCloud\Stores\ApcTokenStore;
 
 class TaxonomiesTest extends TestCase
 {
