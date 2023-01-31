@@ -32,6 +32,8 @@ final class ApiClient
     use Endpoints\Taxonomies;
     use Endpoints\Auth;
 
+    public const VERSION = '0.1.0';
+
     private const SANDBOX_URL = 'https://sandbox.v-shop.cloud/';
     private const SANDBOX_CLIENT_ID = 'test+api@sandbox.v-shop.cloud';
     private const SANDBOX_CLIENT_SECRET = 'jINdGbop8NwA6bGZcQBMtAVIDLuezI8yDaYweq4p07';
@@ -42,6 +44,8 @@ final class ApiClient
 
     private string $url;
 
+    private string $userAgent;
+
     private array $credentials = [];
 
     private ?TokenStore $tokenStore;
@@ -51,6 +55,7 @@ final class ApiClient
         $this->url = Str::finish($url, '/') . 'api/1.0';
         $this->timezone = new DateTimeZone('UTC');
         $this->tokenStore = $tokenStore;
+        $this->userAgent = sprintf('Vanilo Cloud SDK (PHP %s; %s; %s; v%s)', phpversion(), php_uname('s'), php_uname('m'), self::VERSION);
         $this->http = new HttpClient();
     }
 
@@ -112,6 +117,7 @@ final class ApiClient
     {
         return $this
             ->http
+            ->withUserAgent($this->userAgent)
             ->withToken($this->wangleAuthToken())
             ->asJson()
             ->get($this->url . $path, $query);
