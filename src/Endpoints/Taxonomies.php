@@ -36,7 +36,7 @@ trait Taxonomies
         if ($response->successful()) {
             foreach ($response->json('data') as $item) {
                 /** @var Taxonomy $taxonomy */
-                $taxonomy = $this->transpose($item, Taxonomy::class);
+                $taxonomy = new Taxonomy($this->transpose($item, Taxonomy::class));
                 $result->put($taxonomy->id, $taxonomy);
             }
         }
