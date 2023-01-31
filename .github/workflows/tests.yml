@@ -19,6 +19,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: mbstring, json, sqlite3, apcu
+          ini-values: apc.enable_cli=1
           tools: composer:v2
       - name: Composer Install
         run: composer install --prefer-dist --no-progress --no-interaction
