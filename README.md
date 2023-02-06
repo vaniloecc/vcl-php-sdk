@@ -8,7 +8,7 @@
 
 This package provides a PHP SDK for interacting with the [Vanilo Cloud REST API](https://vanilo.cloud/docs/api/).
 
-![Vanilo Cloud PHP Code Sample](/home/fulop/Documents/WebProjects/vanilo/vcl-php-sdk/vcl_code_sample.jpg)
+![Vanilo Cloud PHP Code Sample](vcl_code_sample.jpg)
 
 ## Installation
 
