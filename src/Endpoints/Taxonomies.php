@@ -56,7 +56,7 @@ trait Taxonomies
         }
 
         $response = $this->post('/taxonomies', $payload);
-        if (!$response->created()) {
+        if (201 !== $response->status()) {
             return null;
         }
 
@@ -92,6 +92,6 @@ trait Taxonomies
 
     public function deleteTaxonomy(string|int $id): bool
     {
-        return $this->delete("/taxonomies/$id")->noContent();
+        return 204 === $this->delete("/taxonomies/$id")->status();
     }
 }
