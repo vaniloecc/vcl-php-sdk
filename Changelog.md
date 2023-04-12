@@ -1,5 +1,11 @@
 # Vanilo Cloud PHP SDK Changelog
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added rawPost, rawPatch and rawDelete method to the api client
+- Added create, update and delete taxonomies endpoint
+
 ## 0.2.0
 ##### 2023-01-31
 

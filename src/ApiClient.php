@@ -122,6 +122,21 @@ final class ApiClient
         return $this->get($path, $query);
     }
 
+    public function rawPost(string $path, array $payload): Response
+    {
+        return $this->post($path, $payload);
+    }
+
+    public function rawPatch(string $path, array $payload): Response
+    {
+        return $this->patch($path, $payload);
+    }
+
+    public function rawDelete(string $path): Response
+    {
+        return $this->delete($path);
+    }
+
     private function get(string $path, null|array|string $query = null): Response
     {
         return $this
@@ -130,6 +145,36 @@ final class ApiClient
             ->withToken($this->wangleAuthToken())
             ->asJson()
             ->get($this->url . $path, $query);
+    }
+
+    private function post(string $path, array $payload): Response
+    {
+        return $this
+            ->http
+            ->withUserAgent($this->userAgent)
+            ->withToken($this->wangleAuthToken())
+            ->asJson()
+            ->post($this->url . $path, $payload);
+    }
+
+    private function patch(string $path, array $payload): Response
+    {
+        return $this
+            ->http
+            ->withUserAgent($this->userAgent)
+            ->withToken($this->wangleAuthToken())
+            ->asJson()
+            ->patch($this->url . $path, $payload);
+    }
+
+    private function delete(string $path): Response
+    {
+        return $this
+            ->http
+            ->withUserAgent($this->userAgent)
+            ->withToken($this->wangleAuthToken())
+            ->asJson()
+            ->delete($this->url . $path);
     }
 
     private function transpose(array $attributes, string $forClass): array

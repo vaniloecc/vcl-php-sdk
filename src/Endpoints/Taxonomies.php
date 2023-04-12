@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 namespace VaniloCloud\Endpoints;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use VaniloCloud\Models\Taxonomy;
 
@@ -42,5 +43,55 @@ trait Taxonomies
         }
 
         return $result;
+    }
+
+    /**
+     * Returns the id of the created taxonomy
+     */
+    public function createTaxonomy(string $name, ?string $slug = null): ?string
+    {
+        $payload = ['name' => $name];
+        if (null !== $slug) {
+            $payload['slug'] = $slug;
+        }
+
+        $response = $this->post('/taxonomies', $payload);
+        if (!$response->created()) {
+            return null;
+        }
+
+        $urlParts = explode('/', $response->header('Location'));
+
+        return end($urlParts);
+    }
+
+    /**
+     * @param string|int|Taxonomy $taxonomy
+     * @param null|array{name: ?string, slug: ?string} $changes
+     * @return bool
+     */
+    public function updateTaxonomy(string|int|Taxonomy $taxonomy, ?array $changes = null): bool
+    {
+        if (empty($changes)) {
+            if ($taxonomy instanceof Taxonomy) {
+                $payload = [
+                    'name' => $taxonomy->name,
+                    'slug' => $taxonomy->slug,
+                ];
+            } else {
+                return false;
+            }
+        } else {
+            $payload = Arr::only($changes, ['name', 'slug']);
+        }
+
+        $id = $taxonomy instanceof Taxonomy ? $taxonomy->id : $taxonomy;
+
+        return $this->patch("/taxonomies/$id", $payload)->successful();
+    }
+
+    public function deleteTaxonomy(string|int $id): bool
+    {
+        return $this->delete("/taxonomies/$id")->noContent();
     }
 }

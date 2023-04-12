@@ -43,4 +43,29 @@ class TaxonomiesTest extends TestCase
         $this->assertGreaterThanOrEqual(1, $taxonomies->count());
         $this->assertInstanceOf(Taxonomy::class, $taxonomies->first());
     }
+
+    /** @test */
+    public function it_can_create_and_delete_a_taxonomy()
+    {
+        $api = ApiClient::sandbox();
+        $taxonomyId = $api->createTaxonomy('Hahaha Test ' . uniqid());
+        $this->assertNotNull($taxonomyId);
+
+        $this->assertTrue($api->deleteTaxonomy($taxonomyId));
+    }
+
+    /** @test */
+    public function it_can_create_then_update_and_delete_a_taxonomy()
+    {
+        $api = ApiClient::sandbox();
+        $uid = uniqid();
+        $tid = $api->createTaxonomy('Ergh ergh ergh test  ' . $uid);
+        $this->assertNotNull($tid);
+
+        $this->assertTrue($api->updateTaxonomy($tid, ['name' => "Fixed $uid"]));
+
+        $this->assertEquals("Fixed $uid", $api->taxonomy($tid)?->name);
+
+        $this->assertTrue($api->deleteTaxonomy($tid));
+    }
 }
