@@ -1,7 +1,7 @@
 # Vanilo Cloud PHP SDK Changelog
 
-## Unreleased
-##### 2023-XX-YY
+## 0.4.0
+##### 2023-04-20
 
 - Added accept JSON headers to all requests
 - Fixed validation errors chaining into a misleading 200 response
