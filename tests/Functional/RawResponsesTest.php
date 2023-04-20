@@ -38,4 +38,20 @@ class RawResponsesTest extends TestCase
         $this->assertArrayHasKey('updated_at', $defaultCategory);
         $this->assertArrayHasKey('images', $defaultCategory);
     }
+
+    /** @test */
+    public function it_gives_a_422_response_when_validation_fails()
+    {
+        $sku = uniqid();
+        $api = ApiClient::sandbox();
+
+        try {
+            $api->rawPost('/products', ['name' => "test $sku", 'sku' => $sku]);
+
+            $response = $api->rawPost('/products', ['name' => "test $sku", 'sku' => $sku]);
+            $this->assertEquals(422, $response->status());
+        } finally {
+            $api->rawDelete("/products/$sku");
+        }
+    }
 }

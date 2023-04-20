@@ -141,8 +141,10 @@ final class ApiClient
     {
         return $this
             ->http
+            ->withoutRedirecting()
             ->withUserAgent($this->userAgent)
             ->withToken($this->wangleAuthToken())
+            ->acceptJson()
             ->asJson()
             ->get($this->url . $path, $query);
     }
@@ -151,8 +153,10 @@ final class ApiClient
     {
         return $this
             ->http
+            ->withoutRedirecting()
             ->withUserAgent($this->userAgent)
             ->withToken($this->wangleAuthToken())
+            ->acceptJson()
             ->asJson()
             ->post($this->url . $path, $payload);
     }
@@ -161,8 +165,10 @@ final class ApiClient
     {
         return $this
             ->http
+            ->withoutRedirecting()
             ->withUserAgent($this->userAgent)
             ->withToken($this->wangleAuthToken())
+            ->acceptJson()
             ->asJson()
             ->patch($this->url . $path, $payload);
     }
@@ -171,8 +177,10 @@ final class ApiClient
     {
         return $this
             ->http
+            ->withoutRedirecting()
             ->withUserAgent($this->userAgent)
             ->withToken($this->wangleAuthToken())
+            ->acceptJson()
             ->asJson()
             ->delete($this->url . $path);
     }
