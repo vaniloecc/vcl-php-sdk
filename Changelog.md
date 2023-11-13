@@ -1,5 +1,10 @@
 # Vanilo Cloud PHP SDK Changelog
 
+## Unreleased
+##### 2023-XX-YY
+
+- Added the Laravel Cache Token Store driver
+
 ## 0.4.0
 ##### 2023-04-20
 

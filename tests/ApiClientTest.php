@@ -33,4 +33,12 @@ class ApiClientTest extends TestCase
         $api->useTimeZone('Europe/Berlin');
         $this->assertEquals('Europe/Berlin', $api->timezone()->getName());
     }
+
+    /** @test */
+    public function the_laravel_token_store_can_be_used_on_the_fly()
+    {
+        $client = ApiClient::sandbox()->useLaravelTokenStore();
+
+        $this->assertEquals('laravel', $client->currentTokenStore());
+    }
 }

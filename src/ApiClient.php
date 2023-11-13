@@ -26,6 +26,7 @@ use VaniloCloud\Contracts\TokenStore;
 use VaniloCloud\Exceptions\MissingCredentialsException;
 use VaniloCloud\Models\Credentials;
 use VaniloCloud\Stores\ApcTokenStore;
+use VaniloCloud\Stores\LaravelCacheTokenStore;
 use VaniloCloud\Stores\MemoryTokenStore;
 
 final class ApiClient
@@ -115,6 +116,25 @@ final class ApiClient
         $this->tokenStore = $tokenStore;
 
         return $this;
+    }
+
+    public function useLaravelTokenStore(): ApiClient
+    {
+        return $this->usingTokenStore(new LaravelCacheTokenStore());
+    }
+
+    public function currentTokenStore(): string
+    {
+        if (null === $this->tokenStore) {
+            return 'none';
+        }
+
+        return match($this->tokenStore::class) {
+            MemoryTokenStore::class => 'memory',
+            ApcTokenStore::class => 'apc',
+            LaravelCacheTokenStore::class => 'laravel',
+            default => $this->tokenStore::class,
+        };
     }
 
     public function rawGet(string $path, null|array|string $query = null): Response
