@@ -129,7 +129,7 @@ final class ApiClient
             return 'none';
         }
 
-        return match($this->tokenStore::class) {
+        return match ($this->tokenStore::class) {
             MemoryTokenStore::class => 'memory',
             ApcTokenStore::class => 'apc',
             LaravelCacheTokenStore::class => 'laravel',
