@@ -45,6 +45,23 @@ $api = VaniloCloud\ApiClient::sandbox();
 > Vanilo Cloud Sandbox is available at: https://sandbox.v-shop.cloud/  
 > The sandbox database is reset every 30 minutes
 
+### Token Store
+
+In order to effectively use the token authentication, and to avoid rate limiting exceptions, it's highly recommended
+to use a persistent token store.
+
+When you have the APC extension installed and enabled, then you have nothing to do, everything is handled for you
+behind the scenes.
+
+If you use this library in a Laravel Application, then the best is when you use the built-in Laravel Cache token store,
+that utilizes the configured cache for temporarily storing the auth tokens:
+
+```php
+$api = VaniloCloud\ApiClient::for('https://your.v-shop.cloud')
+    ->withCredentials('client id', 'client secret')
+    ->useLaravelTokenStore();
+```
+
 ### Retrieve Raw Responses
 
 If you need to obtain the raw HTTP response from the API, you need to call the `rawGet`, `rawPost`, etc methods:
