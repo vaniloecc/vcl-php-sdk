@@ -22,7 +22,7 @@ jobs:
           ini-values: apc.enable_cli=1
           tools: composer:v2
       - name: Lock Illuminate Package Versions
-        run: composer require "illuminate/http:${{ matrix.illuminate }}.*" --no-update -v && composer require "illuminate/collections:${{ matrix.illuminate }}.*" && composer require "illuminate/cache:${{ matrix.illuminate }}.*" --no-update -v
+        run: composer require "illuminate/http:${{ matrix.illuminate }}.*" --no-update -v && composer require "illuminate/collections:${{ matrix.illuminate }}.*" --no-update -v && composer require "illuminate/cache:${{ matrix.illuminate }}.*" --no-update -v
       - name: Composer Install
         run: composer install --prefer-dist --no-progress --no-interaction
       - name: Run Tests
