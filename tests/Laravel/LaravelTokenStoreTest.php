@@ -22,8 +22,6 @@ use VaniloCloud\ApiClient;
 
 class LaravelTokenStoreTest extends TestCase
 {
-    use WithWorkbench;
-
     /** @test */
     public function it_can_use_the_token_driver()
     {
