@@ -68,4 +68,21 @@ class TaxonomiesTest extends TestCase
 
         $this->assertTrue($api->deleteTaxonomy($tid));
     }
+
+    /** @test */
+    public function the_list_of_taxonomies_can_be_filtered()
+    {
+        $api = ApiClient::sandbox();
+
+        $taxonomies = $api->taxonomies(Where::createdAfter('2022-12-01T12:00:00'));
+        $taxonomies = $api->taxonomies(Where::slugIs('sad'));
+        $taxonomies = $api->taxonomies(Where::slugLike('cat*'));
+        $taxonomies = $api->taxonomies(Where::nameIs('Category'));
+        $taxonomies = $api->taxonomies(Where::nameLike('Cat*'));
+        $taxonomies = $api->taxonomies(Where::nameLike('Cat*')->andUpdatedAfter('2022-12-31T23:59:59'));
+
+        $this->assertInstanceOf(Collection::class, $taxonomies);
+        $this->assertGreaterThanOrEqual(1, $taxonomies->count());
+        $this->assertInstanceOf(Taxonomy::class, $taxonomies->first());
+    }
 }

@@ -3,7 +3,12 @@
     "description": "SDK for Vanilo Cloud API",
     "type": "library",
     "license": "MIT",
-    "keywords": ["e-commerce", "api", "vanilo", "vanilo cloud"],
+    "keywords": [
+        "e-commerce",
+        "api",
+        "vanilo",
+        "vanilo cloud"
+    ],
     "support": {
         "source": "https://github.com/vaniloecc/vcl-php-sdk",
         "issues": "https://github.com/vaniloecc/vcl-php-sdk/issues"
@@ -18,9 +23,10 @@
         "nesbot/carbon": "^2.53.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^9.5|^10.0",
         "illuminate/cache": ">8",
-        "ext-apcu": "*"
+        "ext-apcu": "*",
+        "orchestra/testbench": "^6.37|^7.34|^8.14"
     },
     "suggest": {
         "ext-apcu": "Required to use the ApcTokenStore",
@@ -33,7 +39,27 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "VaniloCloud\\Tests\\": "tests/"
+            "VaniloCloud\\Tests\\": "tests/",
+            "Workbench\\App\\": "workbench/app/",
+            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
         }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "@build",
+            "@php vendor/bin/testbench serve"
+        ],
+        "test": [
+            "@php vendor/bin/phpunit"
+        ]
     }
 }

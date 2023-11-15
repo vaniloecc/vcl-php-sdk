@@ -43,7 +43,7 @@ class LaravelCacheTokenStore implements TokenStore
 
     public function saveAccessToken(string $token): void
     {
-        Cache::set($this->accessTokenKey(), $token, $this->accessTokenTtl);
+        Cache::put($this->accessTokenKey(), $token, $this->accessTokenTtl);
     }
 
     public function hasRefreshToken(): bool
@@ -58,7 +58,7 @@ class LaravelCacheTokenStore implements TokenStore
 
     public function saveRefreshToken(string $token): void
     {
-        Cache::set($this->refreshTokenKey(), $token, $this->refreshTokenTtl);
+        Cache::put($this->refreshTokenKey(), $token, $this->refreshTokenTtl);
     }
 
     public function hasCredentials(): bool

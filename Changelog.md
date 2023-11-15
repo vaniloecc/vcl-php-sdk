@@ -1,5 +1,11 @@
 # Vanilo Cloud PHP SDK Changelog
 
+## Unreleased
+##### 2023-XX-YY
+
+- Fixed the auth/token endpoint path
+- Fixed `LaravelTokenStore` using unstable cache method
+
 ## 0.5.0
 ##### 2023-11-13
 

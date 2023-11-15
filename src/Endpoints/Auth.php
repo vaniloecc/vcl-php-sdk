@@ -60,7 +60,7 @@ trait Auth
      */
     public function authToken(string $refreshToken): Token
     {
-        $result = $this->http->asForm()->post($this->url . '/auth/login', ['refresh_token' => $refreshToken]);
+        $result = $this->http->asForm()->post($this->url . '/auth/token', ['refresh_token' => $refreshToken]);
 
         if (400 === $result->status()) {
             throw new InvalidRefreshTokenException($result->json('message', 'The passed token is not a refresh token'));

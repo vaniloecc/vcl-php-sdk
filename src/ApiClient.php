@@ -118,9 +118,9 @@ final class ApiClient
         return $this;
     }
 
-    public function useLaravelTokenStore(): ApiClient
+    public function useLaravelTokenStore(int $accessTokenTtl = 90000, int $refreshTokenTtl = 31708800): ApiClient
     {
-        return $this->usingTokenStore(new LaravelCacheTokenStore());
+        return $this->usingTokenStore(new LaravelCacheTokenStore($this->url, null, $accessTokenTtl, $refreshTokenTtl));
     }
 
     public function currentTokenStore(): string
