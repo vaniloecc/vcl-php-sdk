@@ -25,7 +25,7 @@ class LaravelTokenStoreTest extends TestCase
     public function it_can_use_the_token_driver()
     {
         $api = ApiClient::sandbox()->useLaravelTokenStore();
-        $taxonomyId = $api->createTaxonomy(Str::ulid()->toBase58());
+        $taxonomyId = $api->createTaxonomy(Str::uuid()->toString());
         $this->assertNotNull($taxonomyId);
 
         $this->assertTrue($api->deleteTaxonomy($taxonomyId));
