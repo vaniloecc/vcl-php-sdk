@@ -30,7 +30,7 @@
     },
     "suggest": {
         "ext-apcu": "Required to use the ApcTokenStore",
-        "illuminate/cache": ">8"
+        "illuminate/cache": "Required for the LaravelTokenStore ^8.0"
     },
     "autoload": {
         "psr-4": {
