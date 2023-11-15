@@ -14,11 +14,7 @@ declare(strict_types=1);
 
 namespace VaniloCloud\Tests\Laravel;
 
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase;
