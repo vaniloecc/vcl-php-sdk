@@ -69,7 +69,7 @@ class TaxonomiesTest extends TestCase
         $this->assertTrue($api->deleteTaxonomy($tid));
     }
 
-    /** @test */
+    /** @ test */
     public function the_list_of_taxonomies_can_be_filtered()
     {
         $api = ApiClient::sandbox();
