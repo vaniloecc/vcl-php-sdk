@@ -37,7 +37,7 @@ class LaravelTokenStoreTest extends TestCase
     {
         Cache::clear();
         $api = ApiClient::sandbox()->useLaravelTokenStore(2);
-        $taxonomyId = $api->createTaxonomy(Str::ulid()->toBase58());
+        $taxonomyId = $api->createTaxonomy(Str::uuid()->toString());
         $this->assertNotNull($taxonomyId);
 
         sleep(2);
