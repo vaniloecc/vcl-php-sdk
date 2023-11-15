@@ -1,5 +1,10 @@
 # Vanilo Cloud PHP SDK Changelog
 
+## Unreleased
+##### 2023-XX-YY
+
+- Changed the minimal Laravel version from 8.22.1 to 8.83
+
 ## 0.5.1
 ##### 2023-11-15
 
