@@ -4,6 +4,7 @@
 ##### 2023-XX-YY
 
 - Changed the minimal Laravel version from 8.22.1 to 8.83
+- Added Laravel 11 support
 - Added possibility do define HTTP Basic Auth using the `ApiClient::for('url')->withBasicAuth('user', 'pass')`
 
 ## 0.5.1
