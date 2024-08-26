@@ -18,6 +18,7 @@ use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use DateTimeZone;
 use Illuminate\Http\Client\Factory as HttpClient;
+use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -49,6 +50,10 @@ final class ApiClient
     private string $userAgent;
 
     private array $credentials = [];
+
+    private ?string $basicAuthUser = null;
+
+    private ?string $basicAuthPass = null;
 
     private ?TokenStore $tokenStore;
 
@@ -87,6 +92,14 @@ final class ApiClient
     public function timezone(): DateTimeZone
     {
         return $this->timezone;
+    }
+
+    public function withBasicAuth(string $user, string $password): ApiClient
+    {
+        $this->basicAuthUser = $user;
+        $this->basicAuthPass = $password;
+
+        return $this;
     }
 
     public function withCredentials(string $clientId, string $clientSecret): ApiClient
@@ -160,48 +173,28 @@ final class ApiClient
     private function get(string $path, null|array|string $query = null): Response
     {
         return $this
-            ->http
-            ->withoutRedirecting()
-            ->withUserAgent($this->userAgent)
-            ->withToken($this->wangleAuthToken())
-            ->acceptJson()
-            ->asJson()
+            ->baseHttpClient()
             ->get($this->url . $path, $query);
     }
 
     private function post(string $path, array $payload): Response
     {
         return $this
-            ->http
-            ->withoutRedirecting()
-            ->withUserAgent($this->userAgent)
-            ->withToken($this->wangleAuthToken())
-            ->acceptJson()
-            ->asJson()
+            ->baseHttpClient()
             ->post($this->url . $path, $payload);
     }
 
     private function patch(string $path, array $payload): Response
     {
         return $this
-            ->http
-            ->withoutRedirecting()
-            ->withUserAgent($this->userAgent)
-            ->withToken($this->wangleAuthToken())
-            ->acceptJson()
-            ->asJson()
+            ->baseHttpClient()
             ->patch($this->url . $path, $payload);
     }
 
     private function delete(string $path): Response
     {
         return $this
-            ->http
-            ->withoutRedirecting()
-            ->withUserAgent($this->userAgent)
-            ->withToken($this->wangleAuthToken())
-            ->acceptJson()
-            ->asJson()
+            ->baseHttpClient()
             ->delete($this->url . $path);
     }
 
@@ -306,5 +299,18 @@ final class ApiClient
         }
 
         return $this->tokenStore;
+    }
+
+    private function baseHttpClient(): PendingRequest
+    {
+        $result = $this
+            ->http
+            ->withoutRedirecting()
+            ->withUserAgent($this->userAgent)
+            ->withToken($this->wangleAuthToken())
+            ->acceptJson()
+            ->asJson();
+
+        return null !== $this->basicAuthUser ? $result->withBasicAuth($this->basicAuthUser, $this->basicAuthPass) : $result;
     }
 }

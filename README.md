@@ -45,6 +45,17 @@ $api = VaniloCloud\ApiClient::sandbox();
 > Vanilo Cloud Sandbox is available at: https://sandbox.v-shop.cloud/  
 > The sandbox database is reset every 30 minutes
 
+#### HTTP Basic Auth
+
+If your Vanilo Cloud shop instance is protected with basic authentication, then use the
+`withBasicAuth('user', 'pass')` method to pass the basic http auth credentials:
+
+```php
+ApiClient::for('https://your.shop.url')
+    ->withBasicAuth('user', 'pass') // <- Add this line
+    ->withCredentials('client id', 'client secret');
+```
+
 ### Token Store
 
 In order to effectively use the token authentication, and to avoid rate limiting exceptions, it's highly recommended

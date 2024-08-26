@@ -31,7 +31,12 @@ trait Auth
      */
     public function authLogin(Credentials $credentials): Token
     {
-        $result = $this->http->asForm()->post($this->url . '/auth/login', $credentials->toArray());
+        $request = $this->http->asForm();
+        if (null !== $this->basicAuthUser) {
+            $request->withBasicAuth($this->basicAuthUser, $this->basicAuthPass);
+        }
+
+        $result = $request->post($this->url . '/auth/login', $credentials->toArray());
 
         if (401 === $result->status()) {
             throw new InvalidCredentialsException($result->json('message', 'Invalid Credentials'));
@@ -60,7 +65,11 @@ trait Auth
      */
     public function authToken(string $refreshToken): Token
     {
-        $result = $this->http->asForm()->post($this->url . '/auth/token', ['refresh_token' => $refreshToken]);
+        $request = $this->http->asForm();
+        if (null !== $this->basicAuthUser) {
+            $request->withBasicAuth($this->basicAuthUser, $this->basicAuthPass);
+        }
+        $result = $request->post($this->url . '/auth/token', ['refresh_token' => $refreshToken]);
 
         if (400 === $result->status()) {
             throw new InvalidRefreshTokenException($result->json('message', 'The passed token is not a refresh token'));

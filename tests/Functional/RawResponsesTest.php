@@ -23,7 +23,7 @@ class RawResponsesTest extends TestCase
     /** @test */
     public function the_raw_get_method_returns_the_list_of_taxonomies_as_illuminate_http_response()
     {
-        $response = ApiClient::sandbox()->rawGet('/taxonomies');
+        $response = ApiClient::sandbox()->rawGet('/taxonomies?include=images');
 
         $this->assertInstanceOf(Response::class, $response);
         $responseData = $response->json('data');
