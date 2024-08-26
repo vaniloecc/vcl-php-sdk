@@ -35,7 +35,7 @@ final class ApiClient
     use Endpoints\Taxonomies;
     use Endpoints\Auth;
 
-    public const VERSION = '0.5.1';
+    public const VERSION = '0.6.0';
 
     private const SANDBOX_URL = 'https://sandbox.v-shop.cloud/';
     private const SANDBOX_CLIENT_ID = 'test+api@sandbox.v-shop.cloud';
