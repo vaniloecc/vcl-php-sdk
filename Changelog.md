@@ -1,5 +1,9 @@
 # Vanilo Cloud PHP SDK Changelog
 
+## Unreleased
+##### 2024-XX-YY
+- Added Products endpoint
+
 ## 0.6.0
 ##### 2024-08-26
 

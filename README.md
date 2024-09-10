@@ -111,3 +111,64 @@ $taxonomy = $api->taxonomy(1);
 ```
 
 ### Products
+
+To fetch a product by sku:
+```php
+$api = VaniloCloud\ApiClient::sandbox();
+
+$api->product('WBB-030');
+// => VaniloCloud\Models\Product
+//     name: "William Black Bookshelf"
+//     slug: "william-black-bookshelf"
+//     sku: "WBB-030"
+//     ...
+```
+
+To fetch the list of products:
+```php
+$api = VaniloCloud\ApiClient::sandbox();
+
+$api->products();
+// Illuminate\Support\Collection {
+//  #items: array:2 [▼
+//    1 => VaniloCloud\Models\Product
+//    ...
+//  ]
+// ...
+```
+
+To create a product:
+```php
+$api = VaniloCloud\ApiClient::sandbox();
+
+$newProduct = new ProductCreate(
+    'William Black Bookshelf',
+    'WBB-030',
+    state: ProductState::ACTIVE,
+);
+        
+$api->createProduct($newProduct)
+// "WBB-030"
+```
+
+To update a product by sku:
+```php
+$api = VaniloCloud\ApiClient::sandbox();
+
+$fieldsToBeUpdated = new ProductUpdate(
+    name: 'William Black Bookshelf 030',
+    stock: 1337,
+    description: 'William Black Bookshelf. Type: 030',
+);
+
+$api->updateProduct('WBB-030', $fieldsToBeUpdated);
+// true
+```
+
+To delete a product by sku:
+```php
+$api = VaniloCloud\ApiClient::sandbox();
+
+$api->deleteProduct('WBB-030');
+// true
+```
