@@ -139,29 +139,34 @@ $api->products();
 
 To create a product:
 ```php
+use VaniloCloud\Enums\ProductState;
+use VaniloCloud\WriteModels\ProductCreate;
+
 $api = VaniloCloud\ApiClient::sandbox();
 
-$newProduct = new ProductCreate(
-    'William Black Bookshelf',
-    'WBB-030',
-    state: ProductState::ACTIVE,
-);
+$productCreate = new ProductCreate();
+$productCreate
+    ->setName('William Black Bookshelf')
+    ->setSku('WBB-030')
+    ->setState(ProductState::ACTIVE);
         
-$api->createProduct($newProduct)
+$api->createProduct($productCreate);
 // "WBB-030"
 ```
 
 To update a product by sku:
 ```php
+use VaniloCloud\WriteModels\ProductUpdate;
+
 $api = VaniloCloud\ApiClient::sandbox();
 
-$fieldsToBeUpdated = new ProductUpdate(
-    name: 'William Black Bookshelf 030',
-    stock: 1337,
-    description: 'William Black Bookshelf. Type: 030',
-);
+$productUpdate = new ProductUpdate();
+$productUpdate
+    ->setName('William Black Bookshelf 030')
+    ->setStock(1337)
+    ->setDescription('A black bookshelf.');
 
-$api->updateProduct('WBB-030', $fieldsToBeUpdated);
+$api->updateProduct('WBB-030', $productUpdate);
 // true
 ```
 
