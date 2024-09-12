@@ -177,3 +177,67 @@ $api = VaniloCloud\ApiClient::sandbox();
 $api->deleteProduct('WBB-030');
 // true
 ```
+
+### Master Products
+
+To fetch a master product by id:
+```php
+$api = VaniloCloud\ApiClient::sandbox();
+
+$api->masterProduct(1);
+// => VaniloCloud\Models\MasterProduct
+//     name: "My Master Product"
+//     slug: "my-master-product"
+//     price: 1
+//     ...
+```
+
+To fetch the list of master products:
+```php
+$api = VaniloCloud\ApiClient::sandbox();
+
+$api->masterProducts();
+// Illuminate\Support\Collection {
+//  #items: array:2 [▼
+//    1 => VaniloCloud\Models\MasterProduct
+//    ...
+//  ]
+// ...
+```
+
+To create a master product:
+```php
+use VaniloCloud\Enums\ProductState;
+use VaniloCloud\WriteModels\MasterProductCreate;
+
+$api = VaniloCloud\ApiClient::sandbox();
+
+$masterProductCreate = new MasterProductCreate();
+$masterProductCreate
+    ->setName('My Master Product');
+        
+$api->createMasterProduct($masterProductCreate);
+// "1"
+```
+
+To update a master product by id:
+```php
+use VaniloCloud\WriteModels\MasterProductUpdate;
+
+$api = VaniloCloud\ApiClient::sandbox();
+
+$masterProductUpdate = new MasterProductUpdate();
+$masterProductUpdate
+    ->setDescription('This is my Master Product.');
+
+$api->updateMasterProduct(1, $masterProductUpdate);
+// true
+```
+
+To delete a master product by id:
+```php
+$api = VaniloCloud\ApiClient::sandbox();
+
+$api->deleteMasterProduct(1);
+// true
+```

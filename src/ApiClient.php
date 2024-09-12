@@ -35,6 +35,7 @@ final class ApiClient
     use Endpoints\Taxonomies;
     use Endpoints\Auth;
     use Endpoints\Products;
+    use Endpoints\MasterProducts;
 
     public const VERSION = '0.6.0';
 
