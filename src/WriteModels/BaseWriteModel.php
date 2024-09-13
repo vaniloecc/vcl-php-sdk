@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace VaniloCloud\WriteModels;
 
 abstract class BaseWriteModel
