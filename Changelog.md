@@ -4,6 +4,7 @@
 ##### 2024-XX-YY
 
 - Added Products endpoint
+- Added MasterProducts endpoint
 
 ## 0.6.0
 ##### 2024-08-26
