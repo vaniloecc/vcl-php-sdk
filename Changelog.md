@@ -2,6 +2,7 @@
 
 ## Unreleased
 ##### 2024-XX-YY
+
 - Added Products endpoint
 
 ## 0.6.0
