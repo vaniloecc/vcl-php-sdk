@@ -1,9 +1,9 @@
-name: markdownlint
+name: markdown-linter
 
 on: [push, pull_request]
 
 jobs:
-  mdl:
+  check-markdown-syntax:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
