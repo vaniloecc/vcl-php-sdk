@@ -34,6 +34,7 @@ final class ApiClient
 {
     use Endpoints\Taxonomies;
     use Endpoints\Auth;
+    use Endpoints\Products;
 
     public const VERSION = '0.6.0';
 
@@ -207,6 +208,8 @@ final class ApiClient
                 $actualValue = 'true' === strtolower($value);
             } elseif ($this->isADateTimeProperty($key, $forClass)) {
                 $actualValue = $this->makeDateTime($value);
+            } elseif ($this->isAnEnumProperty($key, $forClass)) {
+                $actualValue = $this->makeEnum($key, $forClass, $value);
             } else {
                 $actualValue = $value;
             }
@@ -230,6 +233,41 @@ final class ApiClient
         }
 
         return !empty(Arr::where($details->getType()->getTypes(), fn ($type) => 'bool' === $type));
+    }
+
+    private function isAnEnumProperty(string $property, string $class): bool
+    {
+        if (!property_exists($class, $property)) {
+            return false;
+        }
+
+        $details = new \ReflectionProperty($class, $property);
+        $type = $details->getType();
+
+        if ($type instanceof ReflectionNamedType) {
+            $typeName = $type->getName();
+
+            if (class_exists($typeName)) {
+                return (new \ReflectionClass($typeName))->implementsInterface(\UnitEnum::class);
+            }
+        }
+
+        return false;
+    }
+
+    private function makeEnum(string $property, string $class, string $value): \UnitEnum|null
+    {
+        $details = new \ReflectionProperty($class, $property);
+
+        $type = $details->getType();
+
+        if (!($type instanceof ReflectionNamedType)) {
+            return null;
+        }
+
+        $typeName = $type->getName();
+
+        return $typeName::tryFrom($value);
     }
 
     private function isADateTimeProperty(string $property, string $class): bool
