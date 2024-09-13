@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace VaniloCloud\Models;
 
+use VaniloCloud\Enums\ProductState;
+
 class MasterProduct
 {
     use HasId;
@@ -18,7 +20,7 @@ class MasterProduct
 
     public readonly ?float $original_price;
 
-    public readonly ?string $state;
+    public readonly ?ProductState $state;
 
     public readonly ?string $tax_category_id;
 
