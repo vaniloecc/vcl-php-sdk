@@ -29,7 +29,7 @@ class OrderCreate extends BaseWriteModel
     public function setItems(OrderItemWrite ...$orderItemWrites): self
     {
         $this->data['items'] = array_map(
-            static fn($item) => $item->toArray(),
+            static fn ($item) => $item->toArray(),
             $orderItemWrites
         );
 

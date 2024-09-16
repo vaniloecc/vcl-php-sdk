@@ -70,7 +70,7 @@ trait Orders
     public function createOrder(OrderCreate $orderCreate): ?string
     {
         $response = $this->post('/orders', $orderCreate->toArray());
-dd($orderCreate->toArray(), $response->json(), $response);
+        dd($orderCreate->toArray(), $response->json(), $response);
         if (201 !== $response->status()) {
             return null;
         }
