@@ -113,6 +113,7 @@ $taxonomy = $api->taxonomy(1);
 ### Products
 
 To fetch a product by sku:
+
 ```php
 $api = VaniloCloud\ApiClient::sandbox();
 
@@ -125,6 +126,7 @@ $api->product('WBB-030');
 ```
 
 To fetch the list of products:
+
 ```php
 $api = VaniloCloud\ApiClient::sandbox();
 
@@ -138,6 +140,7 @@ $api->products();
 ```
 
 To create a product:
+
 ```php
 use VaniloCloud\Enums\ProductState;
 use VaniloCloud\WriteModels\ProductCreate;
@@ -155,6 +158,7 @@ $api->createProduct($productCreate);
 ```
 
 To update a product by sku:
+
 ```php
 use VaniloCloud\WriteModels\ProductUpdate;
 
@@ -171,6 +175,7 @@ $api->updateProduct('WBB-030', $productUpdate);
 ```
 
 To delete a product by sku:
+
 ```php
 $api = VaniloCloud\ApiClient::sandbox();
 
@@ -181,6 +186,7 @@ $api->deleteProduct('WBB-030');
 ### Master Products
 
 To fetch a master product by id:
+
 ```php
 $api = VaniloCloud\ApiClient::sandbox();
 
@@ -193,6 +199,7 @@ $api->masterProduct(1);
 ```
 
 To fetch the list of master products:
+
 ```php
 $api = VaniloCloud\ApiClient::sandbox();
 
@@ -206,6 +213,7 @@ $api->masterProducts();
 ```
 
 To create a master product:
+
 ```php
 use VaniloCloud\Enums\ProductState;
 use VaniloCloud\WriteModels\MasterProductCreate;
@@ -221,6 +229,7 @@ $api->createMasterProduct($masterProductCreate);
 ```
 
 To update a master product by id:
+
 ```php
 use VaniloCloud\WriteModels\MasterProductUpdate;
 
@@ -235,6 +244,7 @@ $api->updateMasterProduct(1, $masterProductUpdate);
 ```
 
 To delete a master product by id:
+
 ```php
 $api = VaniloCloud\ApiClient::sandbox();
 
