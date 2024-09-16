@@ -20,9 +20,9 @@ class Order
 
     public readonly FulfillmentStatus $fulfillment_status;
 
-    public readonly string|int|null $user_id;
+    public readonly ?string $user_id;
 
-    public readonly string|int|null $customer_id;
+    public readonly ?string $customer_id;
 
     public readonly ?array $channel;
 
@@ -44,9 +44,11 @@ class Order
 
     public readonly ?array $payment_method;
 
-    public readonly array $payments;
+    public readonly ?array $payments;
 
-    public readonly array $shipments;
+    public readonly ?array $shipments;
+
+    public readonly ?array $adjustments;
 
     public readonly array $items;
 }

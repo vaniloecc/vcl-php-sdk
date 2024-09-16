@@ -13,10 +13,4 @@ enum AddressType: string
     case PICKUP = 'pickup';
     case RESIDENTIAL = 'residential';
     case SHIPPING = 'shipping';
-
-    // todo handle default null
-    /*public static function default(): self
-    {
-        return self::PRODUCT;
-    }*/
 }

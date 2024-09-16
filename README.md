@@ -251,3 +251,103 @@ $api = VaniloCloud\ApiClient::sandbox();
 $api->deleteMasterProduct(1);
 // true
 ```
+
+### Orders
+
+To fetch an order by id:
+
+```php
+$api = VaniloCloud\ApiClient::sandbox();
+
+$api->order(1);
+// => VaniloCloud\Models\Order
+//     number: "6YP-0K1A-BO06"
+//     status:  VaniloCloud\Enums\OrderStatus { ...
+//     fulfillment_status: VaniloCloud\Enums\FulfillmentStatus { ...
+//     ...
+```
+
+To fetch the list of orders
+
+```php
+$api = VaniloCloud\ApiClient::sandbox();
+
+$api->orders();
+// Illuminate\Support\Collection {
+//  #items: array:2 [▼
+//    1 => VaniloCloud\Models\Order
+//    ...
+//  ]
+// ...
+```
+
+To create an order:
+
+```php
+use VaniloCloud\Enums\ProductType;
+use VaniloCloud\WriteModels\OrderCreate;
+use VaniloCloud\WriteModels\BillpayerWrite;
+use VaniloCloud\WriteModels\OrderItemWrite;
+
+$api = VaniloCloud\ApiClient::sandbox();
+
+$billpayerWrite = new BillpayerWrite();
+
+$billpayerWrite
+    ->setEmail('john@doe.com')
+    ->setFirstName('John')
+    ->setLastName('Doe')
+    ->setCountry('GB')
+    ->setCity('London')
+    ->setAddress('Oxford Street');
+
+$orderCreate = new OrderCreate();
+
+$orderItem1 = new OrderItemWrite();
+$orderItem1
+    ->setName('Order item 1')
+    ->setProductId(1)
+    ->setProductType(ProductType::default())
+    ->setPrice(4);
+
+$orderItem2 = new OrderItemWrite();
+$orderItem2
+    ->setName('Order Item 2')
+    ->setProductType(ProductType::default())
+    ->setProductId(2)
+    ->setPrice(2.4);
+
+$orderItems = [$orderItem1, $orderItem2];
+
+$orderCreate
+    ->setBillpayer($billpayerWrite)
+    ->setItems(...$orderItems);
+        
+$api->createOrder($orderCreate);
+// "1"
+```
+
+To update an order by id:
+
+```php
+use VaniloCloud\WriteModels\OrderUpdate;
+use VaniloCloud\Enums\OrderStatus;
+
+$api = VaniloCloud\ApiClient::sandbox();
+
+$orderUpdate = new OrderUpdate();
+$orderUpdate
+    ->setStatus(OrderStatus::PROCESSING);
+
+$api->updateOrder(1, $orderUpdate);
+// true
+```
+
+To delete an order by id:
+
+```php
+$api = VaniloCloud\ApiClient::sandbox();
+
+$api->deleteOrder(1);
+// true
+```

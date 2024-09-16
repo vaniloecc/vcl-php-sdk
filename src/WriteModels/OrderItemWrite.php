@@ -29,7 +29,7 @@ class OrderItemWrite extends BaseWriteModel
         return $this;
     }
 
-    public function setProductType(ProductType $product_type): self
+    public function setProductType(?ProductType $product_type): self
     {
         $this->data['product_type'] = $product_type;
 

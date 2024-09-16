@@ -7,6 +7,7 @@ namespace VaniloCloud\Endpoints;
 use Illuminate\Support\Collection;
 use VaniloCloud\Models\Order;
 use VaniloCloud\WriteModels\OrderCreate;
+use VaniloCloud\WriteModels\OrderUpdate;
 
 trait Orders
 {
@@ -52,9 +53,9 @@ trait Orders
         $result = collect();
         if ($response->successful()) {
             foreach ($response->json('data') as $item) {
-                $masterProduct = new Order($this->transpose($item, Order::class));
+                $order = new Order($this->transpose($item, Order::class));
 
-                $result->put($masterProduct->id, $masterProduct);
+                $result->put($order->id, $order);
             }
         }
 
@@ -70,7 +71,7 @@ trait Orders
     public function createOrder(OrderCreate $orderCreate): ?string
     {
         $response = $this->post('/orders', $orderCreate->toArray());
-        dd($orderCreate->toArray(), $response->json(), $response);
+
         if (201 !== $response->status()) {
             return null;
         }
@@ -79,27 +80,27 @@ trait Orders
 
         return end($urlParts);
     }
-//
-//    /**
-//     * Update an existing master product by id.
-//     *
-//     * @param string|int $id The id of the master product to update.
-//     * @param MasterProductUpdate $masterProductUpdate The updated master product data.
-//     * @return bool True if the update was successful, false otherwise.
-//     */
-//    public function updateMasterProduct(string|int $id, MasterProductUpdate $masterProductUpdate): bool
-//    {
-//        return 200 === $this->patch("/master-products/$id", $masterProductUpdate->toArray())->status();
-//    }
-//
-//    /**
-//     * Delete a master product by id.
-//     *
-//     * @param string|int $id The id of the master product to delete.
-//     * @return bool True if the deletion was successful, false otherwise.
-//     */
-//    public function deleteMasterProduct(string|int $id): bool
-//    {
-//        return 204 === $this->delete("/master-products/$id")->status();
-//    }
+
+    /**
+     * Update an existing order by id.
+     *
+     * @param string|int $id The id of the order to update.
+     * @param OrderUpdate $orderUpdate The updated order data.
+     * @return bool True if the update was successful, false otherwise.
+     */
+    public function updateOrder(string|int $id, OrderUpdate $orderUpdate): bool
+    {
+        return 200 === $this->patch("/orders/$id", $orderUpdate->toArray())->status();
+    }
+
+    /**
+     * Delete an order by id.
+     *
+     * @param string|int $id The id of the order to delete.
+     * @return bool True if the deletion was successful, false otherwise.
+     */
+    public function deleteOrder(string|int $id): bool
+    {
+        return 204 === $this->delete("/orders/$id")->status();
+    }
 }

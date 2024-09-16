@@ -8,13 +8,6 @@ use VaniloCloud\Enums\AddressType;
 
 class AddressWrite extends BaseWriteModel
 {
-    public function setId(?string $id): self
-    {
-        $this->data['id'] = $id;
-
-        return $this;
-    }
-
     public function setType(?AddressType $addressType): self
     {
         $this->data['type'] = $addressType;
@@ -22,7 +15,7 @@ class AddressWrite extends BaseWriteModel
         return $this;
     }
 
-    public function setName(?string $name): self
+    public function setName(string $name): self
     {
         $this->data['name'] = $name;
 
@@ -43,29 +36,28 @@ class AddressWrite extends BaseWriteModel
         return $this;
     }
 
-    public function setCompanyName(?string $companyName): self
+    public function setCompanyName(?string $company_name): self
     {
-        $this->data['company_name'] = $companyName;
+        $this->data['company_name'] = $company_name;
 
         return $this;
     }
 
-    public function setCountry(?string $country): self
+    public function setCountry(string $country): self
     {
         $this->data['country'] = $country;
 
         return $this;
     }
 
-    // TODO
-    public function setProvince(?ProvinceWrite $provinceWrite): self
+    public function setProvince(?string $province): self
     {
-        $this->data['province'] = $provinceWrite?->toArray();
+        $this->data['province'] = $province;
 
         return $this;
     }
 
-    public function setCity(?string $city): self
+    public function setCity(string $city): self
     {
         $this->data['city'] = $city;
 
@@ -124,22 +116,6 @@ class AddressWrite extends BaseWriteModel
     public function setAccessCode(?string $access_code): self
     {
         $this->data['access_code'] = $access_code;
-
-        return $this;
-    }
-
-    // todo carbon
-    public function setCreatedAt(?string $created_at): self
-    {
-        $this->data['created_at'] = $created_at;
-
-        return $this;
-    }
-
-    // todo carbon
-    public function setUpdatedAt(?string $updated_at): self
-    {
-        $this->data['updated_at'] = $updated_at;
 
         return $this;
     }

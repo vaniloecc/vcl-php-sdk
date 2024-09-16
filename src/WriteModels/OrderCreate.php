@@ -92,7 +92,6 @@ class OrderCreate extends BaseWriteModel
         return $this;
     }
 
-    // TODO CARBON
     public function setOrderedAt(?string $ordered_at): self
     {
         $this->data['ordered_at'] = $ordered_at;
