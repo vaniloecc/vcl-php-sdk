@@ -57,9 +57,9 @@ class OrderItemWrite extends BaseWriteModel
         return $this;
     }
 
-    public function set__Instructions(array $__instructions): self
+    public function setInstructions(array $instructions): self
     {
-        $this->data['__instructions'] = $__instructions;
+        $this->data['__instructions'] = $instructions;
 
         return $this;
     }
