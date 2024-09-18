@@ -22,16 +22,16 @@ class OrderItemWrite extends BaseWriteModel
         return $this;
     }
 
-    public function setProductId(?string $product_id): self
+    public function setProductId(?string $productId): self
     {
-        $this->data['product_id'] = $product_id;
+        $this->data['product_id'] = $productId;
 
         return $this;
     }
 
-    public function setProductType(?ProductType $product_type): self
+    public function setProductType(?ProductType $productType): self
     {
-        $this->data['product_type'] = $product_type;
+        $this->data['product_type'] = $productType;
 
         return $this;
     }
@@ -43,9 +43,9 @@ class OrderItemWrite extends BaseWriteModel
         return $this;
     }
 
-    public function setOriginalPrice(?float $original_price): self
+    public function setOriginalPrice(?float $originalPrice): self
     {
-        $this->data['original_price'] = $original_price;
+        $this->data['original_price'] = $originalPrice;
 
         return $this;
     }

@@ -34,44 +34,44 @@ class BillpayerWrite extends BaseWriteModel
         return $this;
     }
 
-    public function setFullName(?string $full_name): self
+    public function setFullName(?string $fullName): self
     {
-        $this->data['full_name'] = $full_name;
+        $this->data['full_name'] = $fullName;
 
         return $this;
     }
 
-    public function setCompanyName(?string $company_name): self
+    public function setCompanyName(?string $companyName): self
     {
-        $this->data['company_name'] = $company_name;
+        $this->data['company_name'] = $companyName;
 
         return $this;
     }
 
-    public function setTaxNr(?string $tax_nr): self
+    public function setTaxNr(?string $taxNr): self
     {
-        $this->data['tax_nr'] = $tax_nr;
+        $this->data['tax_nr'] = $taxNr;
 
         return $this;
     }
 
-    public function setRegistrationNr(?string $registration_nr): self
+    public function setRegistrationNr(?string $registrationNr): self
     {
-        $this->data['registration_nr'] = $registration_nr;
+        $this->data['registration_nr'] = $registrationNr;
 
         return $this;
     }
 
-    public function setIsEuRegistered(bool $is_eu_registered): self
+    public function setIsEuRegistered(bool $isEuRegistered): self
     {
-        $this->data['is_eu_registered'] = $is_eu_registered;
+        $this->data['is_eu_registered'] = $isEuRegistered;
 
         return $this;
     }
 
-    public function setIsOrganization(?bool $is_organization): self
+    public function setIsOrganization(?bool $isOrganization): self
     {
-        $this->data['is_organization'] = $is_organization;
+        $this->data['is_organization'] = $isOrganization;
 
         return $this;
     }
@@ -90,9 +90,9 @@ class BillpayerWrite extends BaseWriteModel
         return $this;
     }
 
-    public function setProvinceId(?string $province_id): self
+    public function setProvinceId(?string $provinceId): self
     {
-        $this->data['province_id'] = $province_id;
+        $this->data['province_id'] = $provinceId;
 
         return $this;
     }

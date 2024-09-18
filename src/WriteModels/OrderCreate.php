@@ -43,23 +43,23 @@ class OrderCreate extends BaseWriteModel
         return $this;
     }
 
-    public function setFulfillmentStatus(?FulfillmentStatus $fulfillment_status): self
+    public function setFulfillmentStatus(?FulfillmentStatus $fulfillmentStatus): self
     {
-        $this->data['fulfillment_status'] = $fulfillment_status;
+        $this->data['fulfillment_status'] = $fulfillmentStatus;
 
         return $this;
     }
 
-    public function setUserId(?string $user_id): self
+    public function setUserId(?string $userId): self
     {
-        $this->data['user_id'] = $user_id;
+        $this->data['user_id'] = $userId;
 
         return $this;
     }
 
-    public function setShippingMethodId(?string $shipping_method_id): self
+    public function setShippingMethodId(?string $shippingMethodId): self
     {
-        $this->data['shipping_method_id'] = $shipping_method_id;
+        $this->data['shipping_method_id'] = $shippingMethodId;
 
         return $this;
     }
@@ -71,9 +71,9 @@ class OrderCreate extends BaseWriteModel
         return $this;
     }
 
-    public function setChannelId(?string $channel_id): self
+    public function setChannelId(?string $channelId): self
     {
-        $this->data['channel_id'] = $channel_id;
+        $this->data['channel_id'] = $channelId;
 
         return $this;
     }
@@ -92,9 +92,9 @@ class OrderCreate extends BaseWriteModel
         return $this;
     }
 
-    public function setOrderedAt(?string $ordered_at): self
+    public function setOrderedAt(?string $orderedAt): self
     {
-        $this->data['ordered_at'] = $ordered_at;
+        $this->data['ordered_at'] = $orderedAt;
 
         return $this;
     }
@@ -106,9 +106,9 @@ class OrderCreate extends BaseWriteModel
         return $this;
     }
 
-    public function setPayableRemoteId(?string $payable_remote_id): self
+    public function setPayableRemoteId(?string $payableRemoteId): self
     {
-        $this->data['payable_remote_id'] = $payable_remote_id;
+        $this->data['payable_remote_id'] = $payableRemoteId;
 
         return $this;
     }

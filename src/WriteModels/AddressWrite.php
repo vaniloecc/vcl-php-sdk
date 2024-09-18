@@ -36,9 +36,9 @@ class AddressWrite extends BaseWriteModel
         return $this;
     }
 
-    public function setCompanyName(?string $company_name): self
+    public function setCompanyName(?string $companyName): self
     {
-        $this->data['company_name'] = $company_name;
+        $this->data['company_name'] = $companyName;
 
         return $this;
     }
@@ -85,16 +85,16 @@ class AddressWrite extends BaseWriteModel
         return $this;
     }
 
-    public function setTaxNr(?string $tax_nr): self
+    public function setTaxNr(?string $taxNr): self
     {
-        $this->data['tax_nr'] = $tax_nr;
+        $this->data['tax_nr'] = $taxNr;
 
         return $this;
     }
 
-    public function setRegistrationNr(?string $registration_nr): self
+    public function setRegistrationNr(?string $registrationNr): self
     {
-        $this->data['registration_nr'] = $registration_nr;
+        $this->data['registration_nr'] = $registrationNr;
 
         return $this;
     }
@@ -113,9 +113,9 @@ class AddressWrite extends BaseWriteModel
         return $this;
     }
 
-    public function setAccessCode(?string $access_code): self
+    public function setAccessCode(?string $accessCode): self
     {
-        $this->data['access_code'] = $access_code;
+        $this->data['access_code'] = $accessCode;
 
         return $this;
     }
