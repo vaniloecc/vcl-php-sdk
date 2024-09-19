@@ -50,9 +50,9 @@ class ProductCreate extends BaseWriteModel
         return $this;
     }
 
-    public function setOriginalPrice(?float $original_price): self
+    public function setOriginalPrice(?float $originalPrice): self
     {
-        $this->data['original_price'] = $original_price;
+        $this->data['original_price'] = $originalPrice;
 
         return $this;
     }
@@ -64,9 +64,9 @@ class ProductCreate extends BaseWriteModel
         return $this;
     }
 
-    public function setTaxCategoryId(?string $tax_category_id): self
+    public function setTaxCategoryId(?string $taxCategoryId): self
     {
-        $this->data['tax_category_id'] = $tax_category_id;
+        $this->data['tax_category_id'] = $taxCategoryId;
 
         return $this;
     }
@@ -78,9 +78,9 @@ class ProductCreate extends BaseWriteModel
         return $this;
     }
 
-    public function setShortDescription(?string $short_description): self
+    public function setShortDescription(?string $shortDescription): self
     {
-        $this->data['short_description'] = $short_description;
+        $this->data['short_description'] = $shortDescription;
 
         return $this;
     }
@@ -113,30 +113,30 @@ class ProductCreate extends BaseWriteModel
         return $this;
     }
 
-    public function setExtTitle(?string $ext_title): self
+    public function setExtTitle(?string $extTitle): self
     {
-        $this->data['ext_title'] = $ext_title;
+        $this->data['ext_title'] = $extTitle;
 
         return $this;
     }
 
-    public function setMetaDescription(?string $meta_description): self
+    public function setMetaDescription(?string $metaDescription): self
     {
-        $this->data['meta_description'] = $meta_description;
+        $this->data['meta_description'] = $metaDescription;
 
         return $this;
     }
 
-    public function setMetaKeywords(?string $meta_keywords): self
+    public function setMetaKeywords(?string $metaKeywords): self
     {
-        $this->data['meta_keywords'] = $meta_keywords;
+        $this->data['meta_keywords'] = $metaKeywords;
 
         return $this;
     }
 
-    public function setCustomAttributes(?array $custom_attributes): self
+    public function setCustomAttributes(?array $customAttributes): self
     {
-        $this->data['custom_attributes'] = $custom_attributes;
+        $this->data['custom_attributes'] = $customAttributes;
 
         return $this;
     }
