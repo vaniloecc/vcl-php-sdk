@@ -5,6 +5,7 @@
 
 - Added Products endpoint
 - Added MasterProducts endpoint
+- Added PHP 8.4 support
 
 ## 0.6.0
 ##### 2024-08-26

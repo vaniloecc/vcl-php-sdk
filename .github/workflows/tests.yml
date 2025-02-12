@@ -9,8 +9,8 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        php: ['8.1', '8.2', '8.3']
-        illuminate: ['8.83', '9.0', '9.52', '10.0', '10.48', '11.0', '11.21']
+        php: ['8.1', '8.2', '8.3', '8.4']
+        illuminate: ['8.83', '9.0', '9.52', '10.0', '10.48', '11.0', '11.42']
         exclude:
           - php: 8.2
             illuminate: 8.83
@@ -27,7 +27,7 @@ jobs:
           - php: 8.1
             illuminate: 11.0
           - php: 8.1
-            illuminate: 11.21
+            illuminate: 11.42
     name: PHP ${{ matrix.php }} Illuminate ${{ matrix.illuminate }}
     steps:
       - name: Checkout
