@@ -3,8 +3,9 @@
 ## Unreleased
 ##### 2024-XX-YY
 
-- Added Products endpoint
-- Added MasterProducts endpoint
+- Added Products endpoint (full CRUD)
+- Added MasterProducts endpoint (full CRUD)
+- Added Orders endpoints (full CRUD)
 - Added PHP 8.4 support
 
 ## 0.6.0
