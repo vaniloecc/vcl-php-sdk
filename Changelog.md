@@ -1,7 +1,7 @@
 # Vanilo Cloud PHP SDK Changelog
 
-## Unreleased
-##### 2024-XX-YY
+## 0.7.0
+##### 2025-02-12
 
 - Added Products endpoint (full CRUD)
 - Added MasterProducts endpoint (full CRUD)
