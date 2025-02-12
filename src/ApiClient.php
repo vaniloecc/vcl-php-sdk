@@ -38,7 +38,7 @@ final class ApiClient
     use Endpoints\MasterProducts;
     use Endpoints\Orders;
 
-    public const VERSION = '0.6.0';
+    public const VERSION = '0.7.0';
 
     private const SANDBOX_URL = 'https://sandbox.v-shop.cloud/';
     private const SANDBOX_CLIENT_ID = 'test+api@sandbox.v-shop.cloud';
