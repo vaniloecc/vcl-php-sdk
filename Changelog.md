@@ -4,6 +4,7 @@
 ##### 2025-XX-YY
 
 - Fixed boolean and datetime handling in transpose method
+- Added the Customers endpoint
 
 ## 0.7.0
 ##### 2025-02-12
