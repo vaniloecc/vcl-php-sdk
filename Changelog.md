@@ -1,5 +1,10 @@
 # Vanilo Cloud PHP SDK Changelog
 
+## Unreleased
+##### 2025-XX-YY
+
+- Added the Addresses endpoint
+
 ## 0.7.0
 ##### 2025-02-12
 
