@@ -207,9 +207,9 @@ final class ApiClient
 
         foreach ($attributes as $key => $value) {
             if ($this->isABoolProperty($key, $forClass)) {
-                $actualValue = 'true' === strtolower($value);
+                $actualValue = is_string($value) ? ('true' === strtolower($value)) : (bool)$value;
             } elseif ($this->isADateTimeProperty($key, $forClass)) {
-                $actualValue = $this->makeDateTime($value);
+                $actualValue = $value !== null ? $this->makeDateTime($value) : null;
             } elseif ($this->isAnEnumProperty($key, $forClass)) {
                 $actualValue = $this->makeEnum($key, $forClass, $value);
             } else {
