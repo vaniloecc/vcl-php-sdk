@@ -423,3 +423,46 @@ $api = VaniloCloud\ApiClient::sandbox();
 $api->deleteCustomer(1);
 // true
 ```
+
+### Addresses
+
+To fetch an address by id:
+
+```php
+$api = VaniloCloud\ApiClient::sandbox();
+
+$api->address(1);
+// => VaniloCloud\Models\Address {#4635
+//      type: VaniloCloud\Enums\AddressType {#4662
+//      name: "PICKUP"
+//      value: "pickup"
+//    }
+//    name: "Jane Doe"
+//    firstname: "Jane"
+//    lastname: "Doe"
+//    ...
+```
+
+To update an address by id:
+
+```php
+use VaniloCloud\WriteModels\AddressUpdate;
+
+$api = VaniloCloud\ApiClient::sandbox();
+
+$addressUpdate = new AddressUpdate();
+$addressUpdate
+    ->setName('John Doe');
+
+$api->updateAddress(1, $addressUpdate);
+// true
+```
+
+To delete an address by id:
+
+```php
+$api = VaniloCloud\ApiClient::sandbox();
+
+$api->deleteAddress(1);
+// true
+```
