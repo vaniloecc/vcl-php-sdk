@@ -1,7 +1,7 @@
 # Vanilo Cloud PHP SDK Changelog
 
-## Unreleased
-##### 2025-XX-YY
+## 0.8.0
+##### 2025-02-21
 
 - Fixed boolean and datetime handling in transpose method
 - Added the Customers endpoint
