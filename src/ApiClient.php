@@ -37,6 +37,7 @@ final class ApiClient
     use Endpoints\Products;
     use Endpoints\MasterProducts;
     use Endpoints\Orders;
+    use Endpoints\Customers;
     use Endpoints\Addresses;
 
     public const VERSION = '0.7.0';
@@ -208,9 +209,9 @@ final class ApiClient
 
         foreach ($attributes as $key => $value) {
             if ($this->isABoolProperty($key, $forClass)) {
-                $actualValue = 'true' === strtolower($value);
+                $actualValue = is_string($value) ? ('true' === strtolower($value)) : $value;
             } elseif ($this->isADateTimeProperty($key, $forClass)) {
-                $actualValue = $this->makeDateTime($value);
+                $actualValue = null !== $value ? $this->makeDateTime($value) : null;
             } elseif ($this->isAnEnumProperty($key, $forClass)) {
                 $actualValue = $this->makeEnum($key, $forClass, $value);
             } else {

@@ -351,3 +351,75 @@ $api = VaniloCloud\ApiClient::sandbox();
 $api->deleteOrder(1);
 // true
 ```
+
+### Customers
+
+To fetch a customer by id:
+
+```php
+$api = VaniloCloud\ApiClient::sandbox();
+
+$api->customer(1);
+// => VaniloCloud\Models\Customer {#4804
+//      default_shipping_address_id: ? ?string,
+//      default_billing_address_id: ? ?string,
+//      type: VaniloCloud\Enums\CustomerType {#4817
+//          name: "ORGANIZATION",
+//          value: "organization",
+//      },
+//      name: "Acme. Inc.",
+//      ...
+```
+
+To fetch the list of customers
+
+```php
+$api = VaniloCloud\ApiClient::sandbox();
+
+$api->customers();
+// Illuminate\Support\Collection {#4807
+//  #items: array:2 [
+//    1 => VaniloCloud\Models\Customer
+//    ...
+//  ]
+// ...
+```
+
+To create a customer:
+
+```php
+use VaniloCloud\Enums\CustomerType;
+use VaniloCloud\WriteModels\CustomerCreate;
+
+$api = VaniloCloud\ApiClient::sandbox();
+
+$customerCreate = new CustomerCreate()
+    ->setCompanyName('Acme. Inc.');
+            
+$api->createCustomer($customerCreate);
+// "1"
+```
+
+To update a customer by id:
+
+```php
+use VaniloCloud\WriteModels\CustomerUpdate;
+
+$api = VaniloCloud\ApiClient::sandbox();
+
+$customerUpdate = new CustomerUpdate();
+$customerUpdate
+    ->setCompanyName('Globex Corporation');
+
+$api->updateCustomer(1, $customerUpdate);
+// true
+```
+
+To delete a customer by id:
+
+```php
+$api = VaniloCloud\ApiClient::sandbox();
+
+$api->deleteCustomer(1);
+// true
+```

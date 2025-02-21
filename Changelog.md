@@ -3,6 +3,8 @@
 ## Unreleased
 ##### 2025-XX-YY
 
+- Fixed boolean and datetime handling in transpose method
+- Added the Customers endpoint
 - Added the Addresses endpoint
 
 ## 0.7.0
