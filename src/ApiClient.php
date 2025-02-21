@@ -38,6 +38,7 @@ final class ApiClient
     use Endpoints\MasterProducts;
     use Endpoints\Orders;
     use Endpoints\Customers;
+    use Endpoints\Addresses;
 
     public const VERSION = '0.7.0';
 
