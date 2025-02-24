@@ -20,9 +20,11 @@ class Address
 
     public readonly ?string $lastname;
 
+    public readonly ?string $company_name;
+
     public readonly ?string $country;
 
-    public readonly ?array $province;
+    public readonly ?Province $province;
 
     public readonly ?string $city;
 

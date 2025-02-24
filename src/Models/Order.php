@@ -36,13 +36,13 @@ class Order
 
     public readonly CarbonImmutable $ordered_at;
 
-    public readonly ?array $billing_address;
+    public readonly ?Billpayer $billing_address;
 
-    public readonly ?array $shipping_address;
+    public readonly ?Address $shipping_address;
 
-    public readonly ?array $shipping_method;
+    public readonly ?ShippingMethod $shipping_method;
 
-    public readonly ?array $payment_method;
+    public readonly ?PaymentMethod $payment_method;
 
     public readonly ?array $payments;
 
@@ -51,4 +51,10 @@ class Order
     public readonly ?array $adjustments;
 
     public readonly array $items;
+
+    public readonly array $invoices;
+
+    public readonly ?string $currency;
+
+    public readonly ?string $language;
 }
