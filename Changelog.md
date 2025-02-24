@@ -1,5 +1,10 @@
 # Vanilo Cloud PHP SDK Changelog
 
+## Unreleased
+##### 2025-XX-YY
+
+- Added support for transposing arrays of objects
+
 ## 0.8.0
 ##### 2025-02-21
 
