@@ -214,7 +214,9 @@ final class ApiClient
                 $actualValue = null !== $value ? $this->makeDateTime($value) : null;
             } elseif ($this->isAnEnumProperty($key, $forClass)) {
                 $actualValue = $this->makeEnum($key, $forClass, $value);
-            } else {
+            } elseif ($this->isAnObjectProperty($key, $forClass)) {
+                $actualValue = $this->makeObject($key, $forClass, $value);
+            }else {
                 $actualValue = $value;
             }
 
@@ -259,6 +261,24 @@ final class ApiClient
         return false;
     }
 
+    private function isAnObjectProperty(string $property, string $class): bool
+    {
+        if (!property_exists($class, $property)) {
+            return false;
+        }
+
+        $details = new \ReflectionProperty($class, $property);
+        $type = $details->getType();
+
+        if ($type instanceof ReflectionNamedType) {
+            $typeName = $type->getName();
+
+            return class_exists($typeName);
+        }
+
+        return false;
+    }
+
     private function makeEnum(string $property, string $class, string $value): \UnitEnum|null
     {
         $details = new \ReflectionProperty($class, $property);
@@ -272,6 +292,29 @@ final class ApiClient
         $typeName = $type->getName();
 
         return $typeName::tryFrom($value);
+    }
+
+    private function makeObject(string $property, string $class, ?array $value): object|null
+    {
+        if ($value === null) {
+            return null;
+        }
+
+        $details = new \ReflectionProperty($class, $property);
+
+        $type = $details->getType();
+
+        if (!($type instanceof ReflectionNamedType)) {
+            return null;
+        }
+
+        $typeName = $type->getName();
+
+        if (!class_exists($typeName)) {
+            return null;
+        }
+
+        return new $typeName($this->transpose($value, $typeName));
     }
 
     private function isADateTimeProperty(string $property, string $class): bool
