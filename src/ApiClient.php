@@ -216,7 +216,7 @@ final class ApiClient
                 $actualValue = $this->makeEnum($key, $forClass, $value);
             } elseif ($this->isAnObjectProperty($key, $forClass)) {
                 $actualValue = $this->makeObject($key, $forClass, $value);
-            }else {
+            } else {
                 $actualValue = $value;
             }
 
@@ -296,7 +296,7 @@ final class ApiClient
 
     private function makeObject(string $property, string $class, ?array $value): object|null
     {
-        if ($value === null) {
+        if (null === $value) {
             return null;
         }
 
