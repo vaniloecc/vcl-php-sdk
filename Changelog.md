@@ -4,6 +4,7 @@
 ##### 2025-XX-YY
 
 - Added support for transposing arrays of objects
+- Added `OrderItem` as the type of the elements of the `items` array in the `Order` model
 
 ## 0.8.0
 ##### 2025-02-21
