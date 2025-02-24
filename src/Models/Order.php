@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace VaniloCloud\Models;
 
 use Carbon\CarbonImmutable;
+use VaniloCloud\Attributes\ArrayOf;
 use VaniloCloud\Enums\FulfillmentStatus;
 use VaniloCloud\Enums\OrderStatus;
 
@@ -50,6 +51,7 @@ class Order
 
     public readonly ?array $adjustments;
 
+    #[ArrayOf(OrderItem::class)]
     public readonly array $items;
 
     public readonly array $invoices;

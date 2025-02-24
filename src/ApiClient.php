@@ -23,6 +23,7 @@ use Illuminate\Http\Client\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use ReflectionNamedType;
+use VaniloCloud\Attributes\ArrayOf;
 use VaniloCloud\Contracts\TokenStore;
 use VaniloCloud\Exceptions\MissingCredentialsException;
 use VaniloCloud\Models\Credentials;
@@ -216,6 +217,8 @@ final class ApiClient
                 $actualValue = $this->makeEnum($key, $forClass, $value);
             } elseif ($this->isAnObjectProperty($key, $forClass)) {
                 $actualValue = $this->makeObject($key, $forClass, $value);
+            } elseif ($this->isAnArrayOfObjectsProperty($key, $forClass)) {
+                $actualValue = $this->makeAnArrayOfObjectsProperty($key, $forClass, $value);
             } else {
                 $actualValue = $value;
             }
@@ -279,6 +282,24 @@ final class ApiClient
         return false;
     }
 
+    private function isAnArrayOfObjectsProperty(string $property, string $class): bool
+    {
+        if (!property_exists($class, $property)) {
+            return false;
+        }
+
+        $reflectionProperty = new \ReflectionProperty($class, $property);
+        $type = $reflectionProperty->getType();
+
+        if (!($type instanceof \ReflectionNamedType) || 'array' !== $type->getName()) {
+            return false;
+        }
+
+        $attributes = $reflectionProperty->getAttributes(ArrayOf::class);
+
+        return !empty($attributes);
+    }
+
     private function makeEnum(string $property, string $class, string $value): \UnitEnum|null
     {
         $details = new \ReflectionProperty($class, $property);
@@ -315,6 +336,24 @@ final class ApiClient
         }
 
         return new $typeName($this->transpose($value, $typeName));
+    }
+
+    private function makeAnArrayOfObjectsProperty(string $property, string $class, ?array $value): array|null
+    {
+        if (null === $value) {
+            return null;
+        }
+
+        $reflectionProperty = new \ReflectionProperty($class, $property);
+        $attributes = $reflectionProperty->getAttributes(ArrayOf::class);
+
+        $arrayOfType = $attributes[0]->newInstance()->type;
+
+        if (!class_exists($arrayOfType)) {
+            return null;
+        }
+
+        return array_map(fn ($item) => new $arrayOfType($this->transpose($item, $arrayOfType)), $value);
     }
 
     private function isADateTimeProperty(string $property, string $class): bool
