@@ -217,10 +217,9 @@ final class ApiClient
                 $actualValue = $this->makeEnum($key, $forClass, $value);
             } elseif ($this->isAnObjectProperty($key, $forClass)) {
                 $actualValue = $this->makeObject($key, $forClass, $value);
-            } elseif($this->isAnArrayOfObjectsProperty($key, $forClass)) {
+            } elseif ($this->isAnArrayOfObjectsProperty($key, $forClass)) {
                 $actualValue = $this->makeAnArrayOfObjectsProperty($key, $forClass, $value);
-            }
-            else {
+            } else {
                 $actualValue = $value;
             }
 
@@ -292,7 +291,7 @@ final class ApiClient
         $reflectionProperty = new \ReflectionProperty($class, $property);
         $type = $reflectionProperty->getType();
 
-        if (!($type instanceof \ReflectionNamedType) || $type->getName() !== 'array') {
+        if (!($type instanceof \ReflectionNamedType) || 'array' !== $type->getName()) {
             return false;
         }
 
@@ -354,7 +353,7 @@ final class ApiClient
             return null;
         }
 
-        return array_map(fn($item) => new $arrayOfType($this->transpose($item, $arrayOfType)), $value);
+        return array_map(fn ($item) => new $arrayOfType($this->transpose($item, $arrayOfType)), $value);
     }
 
     private function isADateTimeProperty(string $property, string $class): bool
