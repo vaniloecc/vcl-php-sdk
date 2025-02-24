@@ -7,7 +7,6 @@ namespace VaniloCloud\Models;
 class ShippingMethod
 {
     use HasId;
-    use HasTimestamps;
     use HasDynamicAttributeConstructor;
 
     public readonly ?string $name;
